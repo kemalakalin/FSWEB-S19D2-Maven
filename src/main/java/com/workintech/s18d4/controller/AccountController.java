@@ -79,6 +79,23 @@ public class AccountController {
                 new CustomerResponse(account.getCustomer().getId(), account.getCustomer().getEmail(), account.getCustomer().getSalary()));
 
     }
+    @GetMapping("/{id}")
+    public AccountResponse find(@PathVariable("id") long id) {
+        Account account = accountService.find(id);
+        if (account == null) {
+            throw new RuntimeException("Account not found");
+        }
+        return new AccountResponse(
+                account.getId(),
+                account.getAccountName(),
+                account.getMoneyAmount(),
+                new CustomerResponse(
+                        account.getCustomer().getId(),
+                        account.getCustomer().getEmail(),
+                        account.getCustomer().getSalary()
+                )
+        );
+    }
 }
 
 
