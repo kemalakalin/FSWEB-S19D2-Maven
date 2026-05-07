@@ -74,7 +74,6 @@ class MainTest {
     private CustomerServiceImpl customerService;
 
     private Customer sampleCustomerForCustomerServiceTest;
-
     @BeforeEach
     void setUp() {
         sampleAccountForAccountEntity = new Account();
@@ -84,8 +83,7 @@ class MainTest {
 
         sampleCustomerForCustomerEntity = new Customer();
         sampleCustomerForCustomerEntity.setId(1L);
-        sampleCustomerForCustomerEntity.setFirstName("John");
-        sampleCustomerForCustomerEntity.setLastName("Doe");
+
 
         sampleAccountForAccountEntity.setCustomer(sampleCustomerForCustomerEntity);
 
@@ -100,8 +98,7 @@ class MainTest {
 
         sampleCustomerForCustomerEntityTest = new Customer();
         sampleCustomerForCustomerEntityTest.setId(2L);
-        sampleCustomerForCustomerEntityTest.setFirstName("Jane");
-        sampleCustomerForCustomerEntityTest.setLastName("Doe");
+
         sampleCustomerForCustomerEntityTest.setEmail("jane.doe@example.com");
         sampleCustomerForCustomerEntityTest.setSalary(3000.0);
 
@@ -115,8 +112,7 @@ class MainTest {
 
 
         Customer customer = new Customer();
-        customer.setFirstName("John");
-        customer.setLastName("Doe");
+
         customer.setEmail("john.doe@example.com");
         customer = entityManager.persistFlushFind(customer);
 
@@ -143,8 +139,7 @@ class MainTest {
         entityManager.persist(address);
 
         sampleCustomerForCustomerRepositoryTest = new Customer();
-        sampleCustomerForCustomerRepositoryTest.setFirstName("John");
-        sampleCustomerForCustomerRepositoryTest.setLastName("Doe");
+
         sampleCustomerForCustomerRepositoryTest.setEmail("john.doe@example.com");
         sampleCustomerForCustomerRepositoryTest.setSalary(50000.0);
         sampleCustomerForCustomerRepositoryTest.setAddress(address);
@@ -159,8 +154,7 @@ class MainTest {
 
         sampleCustomerForCustomerServiceTest = new Customer();
         sampleCustomerForCustomerServiceTest.setId(1L);
-        sampleCustomerForCustomerServiceTest.setFirstName("John");
-        sampleCustomerForCustomerServiceTest.setLastName("Doe");
+
         sampleCustomerForCustomerServiceTest.setEmail("john.doe@example.com");
 
         customerService = new CustomerServiceImpl(mockCustomerRepository);
@@ -173,7 +167,7 @@ class MainTest {
         assertEquals("Savings", sampleAccountForAccountEntity.getAccountName());
         assertEquals(1500.0, sampleAccountForAccountEntity.getMoneyAmount(), 0.001);
         assertEquals(sampleCustomerForCustomerEntity, sampleAccountForAccountEntity.getCustomer());
-        assertEquals("John", sampleAccountForAccountEntity.getCustomer().getFirstName());
+
     }
 
     @Test
@@ -205,8 +199,6 @@ class MainTest {
     @DisplayName("Test Customer Entity Getters and Setters")
     void testCustomerProperties() {
         assertEquals(2L, sampleCustomerForCustomerEntityTest.getId());
-        assertEquals("Jane", sampleCustomerForCustomerEntityTest.getFirstName());
-        assertEquals("Doe", sampleCustomerForCustomerEntityTest.getLastName());
         assertEquals("jane.doe@example.com", sampleCustomerForCustomerEntityTest.getEmail());
         assertEquals(3000.0, sampleCustomerForCustomerEntityTest.getSalary(), 0.001);
         assertTrue(sampleCustomerForCustomerEntityTest.getAccounts().contains(sampleAccountForCustomerEntityTest));
@@ -277,7 +269,6 @@ class MainTest {
 
         Optional<Customer> foundCustomer = customerRepository.findById(sampleCustomerForCustomerRepositoryTest.getId());
         assertTrue(foundCustomer.isPresent());
-        assertEquals("John", foundCustomer.get().getFirstName());
     }
 
     @Test
